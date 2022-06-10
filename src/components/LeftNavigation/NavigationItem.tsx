@@ -11,10 +11,10 @@ type NavigationItemProp = {
 
 export const NavigationItem: FC<NavigationItemProp> = ({ to, icon, label }) => {
   return (
-    <Link to={to}>
-      <ListItemButton>
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText>{label}</ListItemText>
+    <Link to={to} style={{textDecoration: 'none' }} >
+      <ListItemButton sx={{ paddingLeft: 5 }}>
+        <ListItemIcon sx={{ minWidth: '36px'}}>{icon}</ListItemIcon>
+        <ListItemText  sx={{ color: '#757575' }}>{label}</ListItemText>
       </ListItemButton>
     </Link>
   );
