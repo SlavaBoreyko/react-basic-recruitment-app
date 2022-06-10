@@ -1,20 +1,27 @@
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+// import { withStyles } from '@mui/material/styles';
 import { SvgIconComponent } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { FC, ReactElement } from "react";
+
 
 type NavigationItemProp = {
   to: string;
   icon: ReactElement<SvgIconComponent>;
   label: string;
+  selected: boolean;
+  onClick: (event: any) => void; 
 };
 
-export const NavigationItem: FC<NavigationItemProp> = ({ to, icon, label }) => {
+
+export const NavigationItem: FC<NavigationItemProp> = ({ 
+  to, icon, label, selected, onClick 
+}) => {
   return (
     <Link to={to} style={{textDecoration: 'none' }} >
-      <ListItemButton sx={{ paddingLeft: 5}} >
+      <ListItemButton selected={selected} onClick={onClick} sx={{ paddingLeft: 5 }}>
         <ListItemIcon sx={{ minWidth: '36px'}}>{icon}</ListItemIcon>
-        <ListItemText  sx={{ color: '#757575' }}>{label}</ListItemText>
+        <ListItemText  sx={{ color: 'text.primary', fontWeight: 700}}>{label}</ListItemText>
       </ListItemButton>
     </Link>
   );

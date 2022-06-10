@@ -23,6 +23,12 @@ const drawerWidth = 240;
 
 export const LeftNavigation = () => {
 
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const handleListItemClick = (e: any, index:number) => {
+    setSelectedIndex(index);
+  };
+
   return (
     <>
       <Drawer
@@ -45,9 +51,18 @@ export const LeftNavigation = () => {
           <Typography sx={{ color: '#757575', marginLeft: 5, marginBottom: 1 }}>
             Management
           </Typography>
-          <NavigationItem  to={navigationRoutes.dashboard.path} icon={<HomeIcon />} label={'Dashboard'} />
-          <NavigationItem  to={navigationRoutes.sports.path} icon={<SportsSoccerIcon />} label={'Sports'} />
-          <NavigationItem  to={navigationRoutes.competitions.path} icon={<EmojiEventsIcon />} label={'Competitions'} />
+          <NavigationItem  to={navigationRoutes.dashboard.path} icon={<HomeIcon />} label={'Dashboard'} 
+            selected={selectedIndex === 0}
+            onClick={(e) => handleListItemClick(e, 0)}
+          />
+          <NavigationItem  to={navigationRoutes.sports.path} icon={<SportsSoccerIcon />} label={'Sports'} 
+            selected={selectedIndex === 1}
+            onClick={(e) => handleListItemClick(e, 1)}
+          />
+          <NavigationItem  to={navigationRoutes.competitions.path} icon={<EmojiEventsIcon />} label={'Competitions'} 
+            selected={selectedIndex === 2}
+            onClick={(e) => handleListItemClick(e, 2)}
+          />
         </List>
         <Divider />
 
@@ -55,8 +70,14 @@ export const LeftNavigation = () => {
             <Typography sx={{ color: '#757575', marginLeft: 5, marginBottom: 1 }}>
               Planning
             </Typography>
-            <NavigationItem  to={navigationRoutes.scheduling.path} icon={<DateRangeIcon />} label={'Scheduling'} />
-            <NavigationItem  to={navigationRoutes.organisations.path} icon={<CorporateFareIcon />} label={'Organisations'} />
+            <NavigationItem  to={navigationRoutes.scheduling.path} icon={<DateRangeIcon />} label={'Scheduling'} 
+              selected={selectedIndex === 3}
+              onClick={(e) => handleListItemClick(e, 3)}
+            />
+            <NavigationItem  to={navigationRoutes.organisations.path} icon={<CorporateFareIcon />} label={'Organisations'} 
+              selected={selectedIndex === 4}
+              onClick={(e) => handleListItemClick(e, 4)}
+            />
         </List>
         <Divider />
 
@@ -64,7 +85,10 @@ export const LeftNavigation = () => {
             <Typography sx={{ color: '#757575', marginLeft: 5, marginBottom: 1 }}>
               People
             </Typography>
-            <NavigationItem  to={navigationRoutes.users.path} icon={<SupervisedUserCircleIcon />} label={'Users'} />
+            <NavigationItem  to={navigationRoutes.users.path} icon={<SupervisedUserCircleIcon />} label={'Users'} 
+              selected={selectedIndex === 5}
+              onClick={(e) => handleListItemClick(e, 5)}
+            />
         </List>
 
         <Box

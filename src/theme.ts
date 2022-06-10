@@ -30,11 +30,26 @@ export const customOverridesLight: MsfpThemeOptions = {
       paper: "#FFFFFF",
     },
     text: {
+      primary: "#757575",
       secondary: '#9D9D9D',
-    }
+    },
+    action: {
+      selected: "#FF4D00",
+    },
   },
   typography: {
     fontFamily: ["Roboto","Helvetica","Arial",'sans-serif'].join(',')
+  },
+  components: { MuiListItemButton: 
+    { styleOverrides:  
+      { root: 
+        { "&.Mui-selected": { backgroundColor: "rgba(255, 77, 0, 0.1)" ,
+          "& .MuiListItemIcon-root": { color: "#FF4D00" } ,
+          "& .MuiListItemText-root": { color: "#2D2D2D" } ,
+          },
+        },
+      },
+    } 
   }
 };
 
