@@ -26,10 +26,12 @@ export const customOverridesLight: MsfpThemeOptions = {
       contrastText: "#fff",
     },
     background: {
-      // default: "#F5F5F5",
-      default: "#FFFFFF",
+      default: "#F5F5F5",
       paper: "#FFFFFF",
     },
+    text: {
+      secondary: '#9D9D9D',
+    }
   },
   typography: {
     fontFamily: ["Roboto","Helvetica","Arial",'sans-serif'].join(',')

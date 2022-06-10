@@ -10,6 +10,8 @@ import { navigationRoutes } from "./navigationRoutes";
 
 import { createTheme } from '@mui/material/styles';
 
+const LeftNavigationWidth = 240;
+
 function App() {
   const [theme, setTheme] = useState(lightTheme);
 
@@ -27,7 +29,7 @@ function App() {
         <TopBar />
 
         <Grid container>
-          <Grid item sx={{ width: 200 }}>
+          <Grid item sx={{ width: LeftNavigationWidth }}>
             <LeftNavigation />
           </Grid>
           <Grid item xs>

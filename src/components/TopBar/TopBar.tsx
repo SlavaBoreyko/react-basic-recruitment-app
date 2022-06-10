@@ -11,7 +11,7 @@ import { flexbox } from "@mui/system";
 
 export const TopBar = () => {
     return <div>
-      <AppBar position="static" sx={{ bgcolor: 'secondary.main'}}>  
+      <AppBar position="fixed" sx={{ bgcolor: 'secondary.main'}}>  
         <Toolbar 
           sx={{ justifyContent: "space-between" }}
         >

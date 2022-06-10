@@ -1,3 +1,4 @@
+import React from "react";
 import { navigationRoutes } from "../../navigationRoutes";
 import { NavigationItem } from '../LeftNavigation/NavigationItem'
 
@@ -21,6 +22,7 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 const drawerWidth = 240;
 
 export const LeftNavigation = () => {
+
   return (
     <>
       <Drawer
@@ -39,7 +41,7 @@ export const LeftNavigation = () => {
       >
         {/* <Toolbar /> */}
         <Divider />
-        <List sx={{ paddingTop: 6, paddingBottom: 4}}>
+        <List sx={{ paddingTop: 6, paddingBottom: 4}} >
           <Typography sx={{ color: '#757575', marginLeft: 5, marginBottom: 1 }}>
             Management
           </Typography>
@@ -67,7 +69,7 @@ export const LeftNavigation = () => {
 
         <Box
         component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
+        sx={{ flexGrow: 1, bgcolor: 'background.paper', p: 3 }}
         />
       </Drawer>
 
