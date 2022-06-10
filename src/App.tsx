@@ -8,6 +8,8 @@ import { darkTheme, lightTheme } from "./theme";
 import { Error404 } from "./screens/404";
 import { navigationRoutes } from "./navigationRoutes";
 
+import { createTheme } from '@mui/material/styles';
+
 function App() {
   const [theme, setTheme] = useState(lightTheme);
 

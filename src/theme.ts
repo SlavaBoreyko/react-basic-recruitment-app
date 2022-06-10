@@ -19,7 +19,7 @@ export const customOverridesLight: MsfpThemeOptions = {
   palette: {
     mode: "light",
     primary: {
-      main: "#FF4D00",
+      main: "#202020",
     },
     secondary: {
       main: "#2D2D2D",
