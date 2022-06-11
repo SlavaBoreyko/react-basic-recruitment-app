@@ -1,29 +1,41 @@
-/*
-  icon for 'user avatar' can be found here: https://mui.com/material-ui/material-icons/
- */
-
-import { AppBar, ListItemSecondaryAction, Toolbar } from "@mui/material";
+import { useEffect, useState } from "react";
+import { AppBar, Toolbar } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
-import ToggleOffIcon from '@mui/icons-material/ToggleOff';
-import { flexbox } from "@mui/system";
+import Switch from '@mui/material/Switch';
 
 
-export const TopBar = () => {
-    return <div>
-      <AppBar position="fixed" sx={{ bgcolor: 'secondary.main'}}>  
-        <Toolbar 
-          sx={{ justifyContent: "space-between" }}
-        >
+export const TopBar = ({toggleTheme}: any) => {
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
+
+  useEffect(() => {
+    if(checked) {
+      toggleTheme('dark')
+    } else {
+      toggleTheme('light')
+    }
+  },[checked, toggleTheme])
+
+  return <div>
+    <AppBar position="fixed" sx={{ bgcolor: 'secondary.main'}}>  
+      <Toolbar 
+        sx={{ justifyContent: "space-between" }}
+      >
         <img src='/logo.svg' alt="logo" height={40}/>
         <div style={{  display: "flex", alignItems: "center" }}>
-          <ToggleOffIcon sx={{ fontSize: 40 }} />
-          <SettingsIcon  />
+          <Switch
+            checked={checked}
+            onChange={handleChange}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />
+          <SettingsIcon />
           <AccountCircleIcon fontSize='large' sx={{ marginLeft: 2 }}/>
         </div>
-        </Toolbar>
-      </AppBar>
-      
-
-    </div>
+      </Toolbar>
+    </AppBar>
+  </div>
 }

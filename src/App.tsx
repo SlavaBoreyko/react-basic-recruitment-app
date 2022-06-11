@@ -25,7 +25,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <TopBar />
+        <TopBar toggleTheme={toggleTheme}/>
 
         <Grid container>
           <Grid item sx={{ width: LeftNavigationWidth }}>
