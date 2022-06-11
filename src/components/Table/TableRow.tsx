@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { TableColumn } from "./Table";
-import { TableCell, TableRow as MuiTableRow } from "@mui/material";
+import { TableCell, TableRow as MuiTableRow, useTheme } from "@mui/material";
 import { ModelWithId } from "../../types/table.types";
 
 type TableRowProps<Model> = {
@@ -12,6 +12,8 @@ export const TableRow = <Model extends ModelWithId>({
   item,
   columns,
 }: TableRowProps<Model>): JSX.Element => {
+  const theme = useTheme();
+
   const getItemContent = (
     column: TableColumn<Model>
   ): ReactElement | string => {
@@ -25,7 +27,7 @@ export const TableRow = <Model extends ModelWithId>({
   return (
     <MuiTableRow>
       {columns.map((column) => (
-        <TableCell sx={{ textAlign: column.textAlign || "left" }}>
+        <TableCell sx={{ textAlign: column.textAlign || "left", padding: theme.spacing(2,4)}}>
           {getItemContent(column)}
         </TableCell>
       ))}

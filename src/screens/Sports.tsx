@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { SportsType, SportType } from "../types/sports.types";
 import { NoResults } from "../components/NoResults/NoResults";
-import { TableColumn } from "../components/Table/Table";
+import { Table, TableColumn } from "../components/Table/Table";
 import { Visibility } from "@mui/icons-material";
+import { getSports } from "../service/sports.service";
+import { Grid, Typography } from "@mui/material";
 
 export const SportsScreen = () => {
   const [sports, setSports] = useState<SportsType | undefined>(undefined);
@@ -26,6 +28,11 @@ export const SportsScreen = () => {
 
   useEffect(() => {
     // TODO: get data from sports.service
+    const fetchData = async() => {
+      const data = await getSports();
+      setSports(data);
+    }
+    fetchData();
   }, []);
 
   if (!sports) {
@@ -33,5 +40,28 @@ export const SportsScreen = () => {
   }
 
   // TODO: display data got form service
-  return <div>Sports page</div>;
+  return (
+    <>
+      <Grid container 
+        sx={{ paddingTop: 18, paddingBottom: 4, paddingLeft: 4, paddingRight: 4 }}
+      >
+      <Grid item md={12}>
+
+        <Typography sx={{ fontSize: '1.25rem', fontWeight: '500', marginBottom: 2}}>
+          Sports
+        </Typography>
+        <Typography typography={'subtitle2'} color='text.secondary' sx={{ marginBottom: 4}}>
+          {sports.teaser}
+        </Typography>
+
+        <Table 
+            columns={columns}
+            items={sports.items} 
+            title={'Sports'}
+        />
+
+      </Grid>
+      </Grid>
+    </>
+  );
 };
