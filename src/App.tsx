@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { darkTheme, lightTheme } from "./theme";
 import { Error404 } from "./screens/404";
 import { navigationRoutes } from "./navigationRoutes";
+import { Container } from "./components/Container/Container";
 
 const LeftNavigationWidth = 240;
 
@@ -33,7 +34,12 @@ function App() {
           <Grid item xs>
             <Routes>
               {Object.values(navigationRoutes).map((route) => (
-                <Route key={route.path} path={route.path} element={route.element} />
+                (['/', '/sports'].includes(route.path)) ? 
+                (<Route key={route.path} path={route.path} element={route.element} />) 
+                // Template for not ready pages:
+                : <Route key={route.path} path={route.path} element={
+                    (<Container><div>This is {route.path.slice(1,)} page</div></Container>)
+                } /> 
               ))}
               <Route path={"*"} element={<Error404 />} />
             </Routes>
