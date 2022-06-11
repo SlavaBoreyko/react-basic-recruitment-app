@@ -4,7 +4,8 @@ import { NoResults } from "../components/NoResults/NoResults";
 import { Table, TableColumn } from "../components/Table/Table";
 import { Visibility } from "@mui/icons-material";
 import { getSports } from "../service/sports.service";
-import { Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import { Container } from "../components/Container/Container";
 
 export const SportsScreen = () => {
   const [sports, setSports] = useState<SportsType | undefined>(undefined);
@@ -39,29 +40,20 @@ export const SportsScreen = () => {
     return <NoResults />;
   }
 
-  // TODO: display data got form service
   return (
-    <>
-      <Grid container 
-        sx={{ paddingTop: 18, paddingBottom: 4, paddingLeft: 4, paddingRight: 4 }}
-      >
-      <Grid item md={12}>
+    <Container>
+      <Typography sx={{ fontSize: '1.25rem', fontWeight: '500', marginBottom: 2}}>
+        Sports
+      </Typography>
+      <Typography typography={'subtitle2'} color='text.secondary' sx={{ marginBottom: 4}}>
+        {sports.teaser}
+      </Typography>
 
-        <Typography sx={{ fontSize: '1.25rem', fontWeight: '500', marginBottom: 2}}>
-          Sports
-        </Typography>
-        <Typography typography={'subtitle2'} color='text.secondary' sx={{ marginBottom: 4}}>
-          {sports.teaser}
-        </Typography>
-
-        <Table 
-            columns={columns}
-            items={sports.items} 
-            title={'Sports'}
-        />
-
-      </Grid>
-      </Grid>
-    </>
+      <Table 
+          columns={columns}
+          items={sports.items} 
+          title={'Sports'}
+      />
+    </Container>
   );
 };

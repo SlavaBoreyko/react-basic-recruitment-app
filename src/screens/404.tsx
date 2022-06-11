@@ -1,3 +1,13 @@
+import { Typography } from "@mui/material"
+import { Container } from "../components/Container/Container"
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+
 export const Error404 = () => {
-    return <div>Page not found 404</div>
+    return (
+        <Container>
+            <div style={{ width: '100%', textAlign:'center'}}>
+            <ErrorOutlineIcon /> <Typography variant="h6">404: Page not found </Typography>
+            </div>
+        </Container>
+    )      
 }
