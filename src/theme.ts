@@ -75,6 +75,16 @@ export const customOverridesDark: MsfpThemeOptions = {
   },
   typography: {
     fontFamily: ["Roboto","Helvetica","Arial",'sans-serif'].join(',')
+  },
+  components: { MuiListItemButton: 
+    { styleOverrides:  
+      { root: 
+        { "&.Mui-selected": { 
+          "& .MuiListItemIcon-root": { color: "#FF4D00" }
+          },
+        },
+      },
+    } 
   }
 };
 

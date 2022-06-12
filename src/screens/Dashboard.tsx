@@ -4,10 +4,13 @@ import { DashboardItem, DashboardType } from "../types/dashboard.types";
 import { NoResults } from "../components/NoResults/NoResults";
 import { DashboardCard } from "../components/Card/DashboardCard";
 import { getDashboards } from "../service/dashboard.service";
+import { useTheme } from "@mui/material";
+
 
 import { Grid } from "@mui/material";
 
 export const DashboardScreen = () => {
+  const theme = useTheme();
   const [items, setItems] = useState<DashboardType[]>([]);
 
   const getLinkTo = (id: DashboardItem) => {
@@ -42,24 +45,21 @@ export const DashboardScreen = () => {
   }
 
   return (
-    <>
     <Grid container 
       spacing={4} 
-      sx={{ paddingTop: 18, paddingBottom: 4, paddingLeft: 4, paddingRight: 4 }}
+      sx={{ padding: theme.spacing(18,4,4,4)}}
     >
     {
-        items.map((item) => 
-          <Grid item xs={12} md={6}> 
+      items.map((item) => 
+        <Grid key={item.id} item xs={12} md={6}> 
           <DashboardCard 
             title={item.title} 
             text={item.text}
             linkTo={getLinkTo(item.id)} 
           />
-          </Grid>
-        )
-      }
+        </Grid>
+      )
+    }
     </Grid>
-
-    </>
   );
 };

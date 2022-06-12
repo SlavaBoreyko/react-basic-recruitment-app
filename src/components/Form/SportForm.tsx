@@ -30,7 +30,7 @@ export const SportForm: FC<SportFormProps> = ({
 
   return (
   <Paper sx={{height: '25rem', padding: theme.spacing(4,4,2,4), boxSizing: 'border-box'}} >
-    <Grid container md={12} rowSpacing={2} sx={{height: '100%', padding: theme.spacing(2,0,0,0)}}>
+    <Grid container rowSpacing={2} sx={{height: '100%', padding: theme.spacing(2,0,0,0)}}>
         {/* Sport field */}
         <Grid item md={12}>
             <FormControl variant="outlined" sx={{width: '100%'}}>

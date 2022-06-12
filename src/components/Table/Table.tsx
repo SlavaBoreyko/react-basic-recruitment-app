@@ -12,10 +12,9 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
-import { CSSProperties, Dispatch, FC, ReactElement, SetStateAction, useEffect, useState } from "react";
+import { CSSProperties, Dispatch, FC, ReactElement, SetStateAction} from "react";
 import { TableRow } from "./TableRow";
 import { ModelWithId } from "../../types/table.types";
-import { SportType } from "../../types/sports.types";
 
 export type TableColumn<Model> = {
   id: string;

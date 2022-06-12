@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './App.css'
-import { Grid, PaletteMode, ThemeProvider } from "@mui/material";
+import { Grid, PaletteMode, ThemeProvider, Typography } from "@mui/material";
 import { TopBar } from "./components/TopBar/TopBar";
 import { LeftNavigation } from "./components/LeftNavigation/LeftNavigation";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -13,6 +13,7 @@ const LeftNavigationWidth = 240;
 
 function App() {
   const [theme, setTheme] = useState(lightTheme);
+  document.body.style.background = theme.palette.background.default;
 
   const toggleTheme = (mode: PaletteMode) => {
     if (mode === "light") {
@@ -38,7 +39,7 @@ function App() {
                 (<Route key={route.path} path={route.path} element={route.element} />) 
                 // Template for not ready pages:
                 : <Route key={route.path} path={route.path} element={
-                    (<Container><div>This is {route.path.slice(1,)} page</div></Container>)
+                    (<Container><Typography typography='h6' color='text.secondary'>This is {route.path.slice(1,)} page</Typography></Container>)
                 } /> 
               ))}
               <Route path={"*"} element={<Error404 />} />

@@ -8,6 +8,7 @@ import { getSportById, getSports } from "../service/sports.service";
 import { Grid, Typography } from "@mui/material";
 import { SportForm } from "../components/Form/SportForm";
 import { addSport } from "../service/sports.service";
+import { useTheme } from "@mui/material";
 
 export interface FormState {
   sport: string;
@@ -16,6 +17,7 @@ export interface FormState {
 }
 
 export const SportsScreen = () => {
+  const theme = useTheme();
   // For SportForm
   const [newSport, setNewSport] = useState<FormState>({
     sport: '',
@@ -91,26 +93,30 @@ export const SportsScreen = () => {
     if (newSport.name === '' || newSport.location === '') {
       alert(`Please fill the required fields Name and Location`);
     } else {
-      setAddSportForm(false);
       alert(`Submitting sport: ${newSport.sport} with location: ${newSport.location}.`);
 
       // Save to Table 
       await addSport({
-        id: sports.items.length + 1, //add to the tail
+        id: sports.items.length + 1, 
         name: newSport.sport,
         location: newSport.location,
         shortDescription: newSport.name, // No field in the Form
         description: "", // No field in the Form
       })
-
       // Clean Form
       setNewSport({
         sport: '',
         name: '',
         location: ''
       });
+      setAddSportForm(false);
+
+      // Open SportDetail for new user record
+      setSportId(sports.items.length)
+      setindexIcon(sports.items.length);
     }
   } 
+
   // Form button Cancel Handler 
   const cancelForm = () => {
     setNewSport({
@@ -123,12 +129,13 @@ export const SportsScreen = () => {
 
   return (
     <Grid container 
+      columns={{ xs: 4, sm: 8, md: 12 }}
       spacing={4} 
-      sx={{ paddingTop: 18, paddingBottom: 4, paddingLeft: 4, paddingRight: 4 }}
+      sx={{ padding: theme.spacing(18,4,4,4) }} 
     > 
       {/* TITLE & TEASER */}
-      <Grid item md={12}>
-        <Typography sx={{ fontSize: '1.25rem', fontWeight: '500', marginBottom: 2}}>
+      <Grid item md={12} >
+        <Typography sx={{ fontSize: '1.25rem', fontWeight: '500', marginBottom: 2}} color='text.primary'>
           Sports
         </Typography>
         <Typography typography={'subtitle2'} color='text.secondary'>
@@ -137,7 +144,7 @@ export const SportsScreen = () => {
       </Grid> 
 
       {/* TABLE */}
-      <Grid item md={6}>
+      <Grid item xs={4} sm={8} md={6} sx={{ minWidth: '33rem'}}>
         <Table 
             columns={columns}
             items={sports.items} 
@@ -152,7 +159,7 @@ export const SportsScreen = () => {
       {/* CARD */}
       {
         (sportDetails) && (
-          <Grid item md={6}>
+          <Grid item xs={4} sm={8} md={6}>
             <SportDetail sportDetails={sportDetails} />
           </Grid>
         )
@@ -161,7 +168,7 @@ export const SportsScreen = () => {
       {/* FORM */}
       { 
         (addSportForm) && (!sportDetails) && 
-        (<Grid item md={6}>
+        (<Grid item xs={4} sm={8} md={6} sx={{maxWidth: '100%'}}>
           <SportForm 
             newSport={newSport}
             handleChange={handleChange}
