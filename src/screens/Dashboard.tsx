@@ -49,7 +49,7 @@ export const DashboardScreen = () => {
     >
     {
         items.map((item) => 
-          <Grid item xs={12} md={6} > 
+          <Grid item xs={12} md={6}> 
           <DashboardCard 
             title={item.title} 
             text={item.text}

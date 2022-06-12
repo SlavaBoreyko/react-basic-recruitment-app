@@ -96,21 +96,6 @@ export const LeftNavigation = () => {
         sx={{ flexGrow: 1, bgcolor: 'background.paper', p: 3 }}
         />
       </Drawer>
-
-     
-
-      {/* <p>Management</p>
-      <Link to={navigationRoutes.dashboard.path}>Dashboard</Link>
-      <Link to={""}>Sports</Link>
-      <Link to={""}>Competitions</Link>
-      <Divider />
-      <p>Planning</p>
-      <Link to={""}>Scheduling</Link>
-      <Link to={""}>Organisations</Link>
-      <Divider />
-      <p>People</p>
-      <Link to={""}>Scheduling</Link>
-      <Link to={""}>Organisations</Link> */}
     </>
   );
 };

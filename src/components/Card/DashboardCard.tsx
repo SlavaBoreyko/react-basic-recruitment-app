@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 type DashboardCardProps = {
   title: string;
   text: string;
-  linkTo: string;
+  linkTo: string; 
 };
 
 // TODO: style to match designs

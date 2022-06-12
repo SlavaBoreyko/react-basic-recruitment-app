@@ -12,10 +12,10 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
-import { CSSProperties, FC, ReactElement } from "react";
+import { CSSProperties, FC, ReactElement, useEffect, useState } from "react";
 import { TableRow } from "./TableRow";
 import { ModelWithId } from "../../types/table.types";
-import { SportsType } from "../../types/sports.types";
+import { SportType } from "../../types/sports.types";
 
 export type TableColumn<Model> = {
   id: string;
@@ -29,6 +29,7 @@ type TableProps<Model extends ModelWithId> = {
   items: Model[]; 
   title: string;
   ButtonProps?: Pick<ButtonProps, "children" | "onClick">;
+  handleSportId: (e: any, id:any) => void;
 };
 
 export const Table: FC<TableProps<any>> = ({
@@ -36,8 +37,10 @@ export const Table: FC<TableProps<any>> = ({
   items,
   title,
   ButtonProps,
+  handleSportId
 }) => {
   const theme = useTheme();
+  const [indexIcon, setindexIcon] = useState<string | number | undefined>(undefined);
 
   return (
     <Box>
@@ -66,7 +69,7 @@ export const Table: FC<TableProps<any>> = ({
           <TableHead>
             <MuiTableRow>
               {columns.map((column) => (
-                <TableCell
+                <TableCell 
                   key={column.id}
                   sx={{ textAlign: column.textAlign || "left",
                         padding: theme.spacing(2,4)
@@ -79,7 +82,9 @@ export const Table: FC<TableProps<any>> = ({
           </TableHead>
           <TableBody>
             {items.map((item) => (
-              <TableRow key={item.id} item={item} columns={columns} />
+              <TableRow key={item.id} item={item} columns={columns} handleSportId={handleSportId}
+                setindexIcon={setindexIcon} indexIcon={indexIcon}
+              />
             ))}
           </TableBody>
         </MuiTable>
