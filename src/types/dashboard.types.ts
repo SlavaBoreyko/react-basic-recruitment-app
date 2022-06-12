@@ -12,3 +12,10 @@ export type DashboardType = {
     title: string;
     text: string;
 };
+
+export type DashboardCardProps = {
+    title: string;
+    text: string;
+    linkTo: string; 
+};
+  

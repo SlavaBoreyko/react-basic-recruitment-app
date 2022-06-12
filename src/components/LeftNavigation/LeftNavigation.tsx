@@ -34,7 +34,7 @@ export const LeftNavigation = () => {
         variant="permanent"
         anchor="left"
       >
-        {/* <Toolbar /> */}
+        {/* MANAGMENT  */}
         <Divider />
         <List sx={{ paddingTop: 6, paddingBottom: 4}} >
           <Typography sx={{ color: '#757575', marginLeft: 5, marginBottom: 1 }}>
@@ -52,6 +52,7 @@ export const LeftNavigation = () => {
         </List>
         <Divider />
 
+        {/* PLANNING  */}
         <List sx={{ paddingTop: 2, paddingBottom: 4}}>
             <Typography sx={{ color: '#757575', marginLeft: 5, marginBottom: 1 }}>
               Planning
@@ -65,6 +66,7 @@ export const LeftNavigation = () => {
         </List>
         <Divider />
 
+        {/* PEOPLE */}
         <List sx={{ paddingTop: 2, paddingBottom: 4}}>
             <Typography sx={{ color: '#757575', marginLeft: 5, marginBottom: 1 }}>
               People
@@ -73,7 +75,8 @@ export const LeftNavigation = () => {
               selected={locationReact === navigationRoutes.users.path}
             />
         </List> 
-
+        
+        {/* Box occupies a free place with bgcolor */}
         <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: 'background.paper', p: 3 }}

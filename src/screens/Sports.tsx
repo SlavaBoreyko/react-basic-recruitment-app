@@ -1,32 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { SportsType, SportType } from "../types/sports.types";
+import { SportFormType } from "../types/form.types";
 import { NoResults } from "../components/NoResults/NoResults";
-import { Table, TableColumn } from "../components/Table/Table";
+import { Table } from "../components/Table/Table";
+import { TableColumn } from "../types/table.types";
 import { SportDetail } from "../components/SportDetail/SportDetail";
 import { Visibility } from "@mui/icons-material";
-import { getSportById, getSports } from "../service/sports.service";
-import { Grid, Typography } from "@mui/material";
+import { getSportById, getSports, addSport} from "../service/sports.service";
+import { Grid, Typography, useTheme } from "@mui/material";
 import { SportForm } from "../components/Form/SportForm";
-import { addSport } from "../service/sports.service";
-import { useTheme } from "@mui/material";
-
-export interface FormState {
-  sport: string;
-  name: string;
-  location: string;
-}
 
 export const SportsScreen = () => {
   const theme = useTheme();
   // For SportForm
-  const [newSport, setNewSport] = useState<FormState>({
+  const [newSport, setNewSport] = useState<SportFormType>({
     sport: '',
     name: '',
     location: ''
   });
 
   const handleChange =
-    (prop: keyof FormState) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (prop: keyof SportFormType) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setNewSport({ ...newSport, [prop]: event.target.value });
   };
 
@@ -34,14 +28,13 @@ export const SportsScreen = () => {
   const [sportDetails, setSportDetails] = useState<SportType | undefined>(undefined);
   const [idSport, setSportId] = useState<SportType['id'] | undefined>(undefined);
   const [indexIcon, setindexIcon] = useState<string | number | undefined>(undefined);
-
   const [addSportForm, setAddSportForm] = useState<Boolean>(false);
 
   // Auto switch (close Form / close Card)
   useEffect(() => {
     if (addSportForm) {
       setSportDetails(undefined); 
-      // setindexIcon(undefined); Bug: don't update icon
+      // setindexIcon(undefined); //Bug: don't update icon
     }
   },[addSportForm])
 
@@ -77,7 +70,7 @@ export const SportsScreen = () => {
   }
 
   // Switch SportsDetails card
-  const handleSportId = (e: any, id: any)  => {
+  const handleSportId = (id: SportType['id'] | undefined)  => {
     setSportId(id)
   }
   useEffect(() => {
@@ -129,7 +122,7 @@ export const SportsScreen = () => {
 
   return (
     <Grid container 
-      columns={{ xs: 4, sm: 8, md: 12 }}
+      columns={{ xs: 12, sm: 12, md: 12 }}
       spacing={4} 
       sx={{ padding: theme.spacing(18,4,4,4) }} 
     > 
@@ -144,7 +137,7 @@ export const SportsScreen = () => {
       </Grid> 
 
       {/* TABLE */}
-      <Grid item xs={4} sm={8} md={6} sx={{ minWidth: '33rem'}}>
+      <Grid item xs={12} sm={12} md={6} sx={{ minWidth: '33rem'}}>
         <Table 
             columns={columns}
             items={sports.items} 
@@ -159,7 +152,7 @@ export const SportsScreen = () => {
       {/* CARD */}
       {
         (sportDetails) && (
-          <Grid item xs={4} sm={8} md={6}>
+          <Grid item xs={12} sm={12} md={6} sx={{ minWidth: '33rem'}}>
             <SportDetail sportDetails={sportDetails} />
           </Grid>
         )
@@ -168,7 +161,7 @@ export const SportsScreen = () => {
       {/* FORM */}
       { 
         (addSportForm) && (!sportDetails) && 
-        (<Grid item xs={4} sm={8} md={6} sx={{maxWidth: '100%'}}>
+        (<Grid item xs={12} sm={12} md={6} sx={{ minWidth: '33rem'}}>
           <SportForm 
             newSport={newSport}
             handleChange={handleChange}

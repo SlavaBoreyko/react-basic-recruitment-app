@@ -3,23 +3,17 @@ import {
     useTheme, 
     Grid,
     Paper, 
-    FormControl, 
-    OutlinedInput, 
-    InputLabel, 
-    InputAdornment, 
     Button
 } from "@mui/material";
-import { AccountCircle, FmdGood as FmdGoodIcon, Save as SaveIcon } from "@mui/icons-material";
-import { FormState } from "../../screens/Sports";
+import { 
+    AccountCircle, 
+    FmdGood as FmdGoodIcon, 
+    SportsSoccer as SportsSoccerIcon,
+    Save as SaveIcon,
+} from "@mui/icons-material";
+import { SportFormProps } from "../../types/form.types";
+import { InputForm } from "./InputForm";
 
-type SportFormProps = {
-    newSport: FormState;
-    handleChange: (prop: keyof FormState) => (event: React.ChangeEvent<HTMLInputElement>) => void;
-    alertSave: () => void;
-    cancelForm: () => void;
-};
-
-// TODO: style to match designs
 export const SportForm: FC<SportFormProps> = ({
     newSport,
     handleChange,
@@ -32,80 +26,48 @@ export const SportForm: FC<SportFormProps> = ({
   <Paper sx={{height: '25rem', padding: theme.spacing(4,4,2,4), boxSizing: 'border-box'}} >
     <Grid container rowSpacing={2} sx={{height: '100%', padding: theme.spacing(2,0,0,0)}}>
         {/* Sport field */}
-        <Grid item md={12}>
-            <FormControl variant="outlined" sx={{width: '100%'}}>
-                <InputLabel htmlFor="input-sport">
-                    Sport
-                </InputLabel>
-                <OutlinedInput 
-                    id="input-sport"
-                    value={newSport.sport}
-                    onChange={handleChange('sport')}
-                    startAdornment={
-                    <InputAdornment position="start">
-                        <AccountCircle />
-                    </InputAdornment>
-                    }
-                    label="Sport"
-                    sx={{width: '100%'}}
-                />
-            </FormControl>
+        <Grid item xs={12} sm={12} md={12}>
+            <InputForm 
+                value={newSport.sport} 
+                label={`sport`} 
+                icon={<SportsSoccerIcon />}
+                handleChange={handleChange}
+            />
         </Grid>
 
         {/* Location field */}
-        <Grid item md={12}>
-            <FormControl variant="outlined" sx={{width: '100%'}}>
-                <InputLabel htmlFor="input-location">
-                    Location
-                </InputLabel>
-                <OutlinedInput 
-                    id="input-location"
-                    value={newSport.location}
-                    onChange={handleChange('location')}
-                    startAdornment={
-                    <InputAdornment position="start">
-                        <FmdGoodIcon />
-                    </InputAdornment>
-                    }
-                    label="Location"
-                    sx={{width: '100%'}}
-                />
-            </FormControl>
+        <Grid item xs={12} sm={12} md={12}>
+            <InputForm 
+                value={newSport.location} 
+                label={`location`} 
+                icon={<FmdGoodIcon />}
+                handleChange={handleChange}
+            />
         </Grid>
 
         {/* Name field */}
-        <Grid item md={12}>
-            <FormControl variant="outlined" sx={{width: '100%'}}>
-                <InputLabel htmlFor="input-name">
-                    Name
-                </InputLabel>
-                <OutlinedInput 
-                    id="input-name"
-                    value={newSport.name}
-                    onChange={handleChange('name')}
-                    startAdornment={
-                    <InputAdornment position="start">
-                        <AccountCircle />
-                    </InputAdornment>
-                    }
-                    label="Name"
-                    sx={{width: '100%'}}
-                />
-            </FormControl>
+        <Grid item xs={12} sm={12} md={12}>
+            <InputForm 
+                value={newSport.name} 
+                label={`name`} 
+                icon={<AccountCircle />}
+                handleChange={handleChange}
+            />
         </Grid>
+
         {/* Buttoms */}
         <Grid container spacing={2} sx={{ justifyContent: 'flex-end', alignContent: 'flex-end'}}>
-            <Grid item md={3}>
+            <Grid item  xs={6} md={3}>
                 <Button variant="contained" sx={{width: '100%'}} startIcon={<SaveIcon />}
-                onClick={() => alertSave()}>
-                Save
+                    onClick={() => alertSave()}>
+                    Save
                 </Button>
             </Grid>
 
-            <Grid item md={3}>
+            <Grid item xs={6} md={3}>
                 <Button variant="outlined" sx={{width: '100%'}} 
-                onClick={() => cancelForm()}>
-                Cancel
+                    onClick={() => cancelForm()}>
+                    Cancel
                 </Button>
             </Grid>
         </Grid>

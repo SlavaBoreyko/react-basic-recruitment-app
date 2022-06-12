@@ -15,26 +15,10 @@ import {
 import { CSSProperties, Dispatch, FC, ReactElement, SetStateAction} from "react";
 import { TableRow } from "./TableRow";
 import { ModelWithId } from "../../types/table.types";
+import { SportType } from "../../types/sports.types";
+import { TableProps, TableColumn } from "../../types/table.types";
 
-export type TableColumn<Model> = {
-  id: string;
-  label: string;
-  value: keyof Model | ReactElement;
-  textAlign?: CSSProperties["textAlign"];
-};
 
-type TableProps<Model extends ModelWithId> = {
-  columns: TableColumn<Model>[];
-  items: Model[]; 
-  title: string;
-  ButtonProps?: Pick<ButtonProps, "children" | "onClick">;
-  // For Action & Sport Detail 
-  handleSportId: (e: any, id:any) => void;
-  setindexIcon: Dispatch<SetStateAction<string | number | undefined>>;
-  indexIcon: string | number | undefined;
-  // For form
-  setAddSportForm: Dispatch<SetStateAction<Boolean>>;
-};
 
 export const Table: FC<TableProps<any>> = ({
   columns,

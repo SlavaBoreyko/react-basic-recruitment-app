@@ -35,11 +35,18 @@ function App() {
           <Grid item xs>
             <Routes>
               {Object.values(navigationRoutes).map((route) => (
+                // Array of the finished pages 
                 (['/', '/sports'].includes(route.path)) ? 
                 (<Route key={route.path} path={route.path} element={route.element} />) 
-                // Template for not ready pages:
+                // Template for blank pages:
                 : <Route key={route.path} path={route.path} element={
-                    (<Container><Typography typography='h6' color='text.secondary'>This is {route.path.slice(1,)} page</Typography></Container>)
+                    (
+                      <Container>
+                        <Typography typography='h6' color='text.secondary'>
+                          This is {route.path.slice(1,)} page
+                        </Typography>
+                      </Container>
+                    )
                 } /> 
               ))}
               <Route path={"*"} element={<Error404 />} />

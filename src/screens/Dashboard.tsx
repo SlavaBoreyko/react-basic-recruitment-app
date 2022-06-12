@@ -4,10 +4,7 @@ import { DashboardItem, DashboardType } from "../types/dashboard.types";
 import { NoResults } from "../components/NoResults/NoResults";
 import { DashboardCard } from "../components/Card/DashboardCard";
 import { getDashboards } from "../service/dashboard.service";
-import { useTheme } from "@mui/material";
-
-
-import { Grid } from "@mui/material";
+import { useTheme, Grid } from "@mui/material";
 
 export const DashboardScreen = () => {
   const theme = useTheme();

@@ -1,13 +1,14 @@
 import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react";
-import { TableColumn } from "./Table";
+import { TableColumn } from "../../types/table.types";
 import { TableCell, TableRow as MuiTableRow, useTheme } from "@mui/material";
 import { ModelWithId } from "../../types/table.types";
 import { IconButton } from "@mui/material";
+import { SportType } from "../../types/sports.types";
 
 type TableRowProps<Model> = {
   item: Model;
   columns: TableColumn<Model>[];
-  handleSportId: (e: any, id:any) => void;
+  handleSportId: (id: SportType['id'] | undefined) => void;
   setindexIcon: Dispatch<SetStateAction<string | number | undefined>>;
   indexIcon: string | number | undefined;
 };
@@ -34,8 +35,8 @@ export const TableRow  = <Model extends ModelWithId>({
     if (React.isValidElement(column.value)) {
       return ( 
         <IconButton color={iconActive}
-          onClick={(e) => {
-            handleSportId(e, item['id']);
+          onClick={() => {
+            handleSportId(+item['id']);
             seticonActive("primary")
             setindexIcon(item['id'])
         }}>     
@@ -49,7 +50,11 @@ export const TableRow  = <Model extends ModelWithId>({
 
   return (
    
-    <MuiTableRow >
+    <MuiTableRow sx={{
+      "&:hover": {
+        backgroundColor: "background.default"
+      }
+    }}>
       {columns.map((column) => (
         <TableCell key={`${item.id}-${column.label}`} sx={{ textAlign: column.textAlign || "left", padding: theme.spacing(2,4)}}>
           {getItemContent(column)}
