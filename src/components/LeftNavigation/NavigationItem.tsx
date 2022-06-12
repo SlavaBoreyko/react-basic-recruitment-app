@@ -10,16 +10,15 @@ type NavigationItemProp = {
   icon: ReactElement<SvgIconComponent>;
   label: string;
   selected: boolean;
-  onClick: (event: any) => void; 
 };
 
 
 export const NavigationItem: FC<NavigationItemProp> = ({ 
-  to, icon, label, selected, onClick 
+  to, icon, label, selected
 }) => {
   return (
     <Link to={to} style={{textDecoration: 'none' }} >
-      <ListItemButton selected={selected} onClick={onClick} sx={{ paddingLeft: 5 }}>
+      <ListItemButton selected={selected} sx={{ paddingLeft: 5 }}>
         <ListItemIcon sx={{ minWidth: '36px'}}>{icon}</ListItemIcon>
         <ListItemText sx={{ color: 'text.primary', fontWeight: 700}}>{label}</ListItemText>
       </ListItemButton>

@@ -1,33 +1,22 @@
-import React from "react";
 import { navigationRoutes } from "../../navigationRoutes";
 import { NavigationItem } from '../LeftNavigation/NavigationItem'
-
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-
-
 import HomeIcon from '@mui/icons-material/Home';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-
-
-
+import { useLocation } from "react-router-dom"; 
 
 const drawerWidth = 240;
 
-export const LeftNavigation = () => {
-
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-
-  const handleListItemClick = (e: any, index:number) => {
-    setSelectedIndex(index);
-  };
+export const LeftNavigation = () => { 
+  const locationReact = useLocation().pathname;
 
   return (
     <>
@@ -52,16 +41,13 @@ export const LeftNavigation = () => {
             Management
           </Typography>
           <NavigationItem  to={navigationRoutes.dashboard.path} icon={<HomeIcon />} label={'Dashboard'} 
-            selected={selectedIndex === 0}
-            onClick={(e) => handleListItemClick(e, 0)}
+            selected={locationReact === navigationRoutes.dashboard.path}
           />
           <NavigationItem  to={navigationRoutes.sports.path} icon={<SportsSoccerIcon />} label={'Sports'} 
-            selected={selectedIndex === 1}
-            onClick={(e) => handleListItemClick(e, 1)}
+            selected={locationReact === navigationRoutes.sports.path}
           />
           <NavigationItem  to={navigationRoutes.competitions.path} icon={<EmojiEventsIcon />} label={'Competitions'} 
-            selected={selectedIndex === 2}
-            onClick={(e) => handleListItemClick(e, 2)}
+            selected={locationReact === navigationRoutes.competitions.path}
           />
         </List>
         <Divider />
@@ -71,13 +57,11 @@ export const LeftNavigation = () => {
               Planning
             </Typography>
             <NavigationItem  to={navigationRoutes.scheduling.path} icon={<DateRangeIcon />} label={'Scheduling'} 
-              selected={selectedIndex === 3}
-              onClick={(e) => handleListItemClick(e, 3)}
+              selected={locationReact === navigationRoutes.scheduling.path}
             />
             <NavigationItem  to={navigationRoutes.organisations.path} icon={<CorporateFareIcon />} label={'Organisations'} 
-              selected={selectedIndex === 4}
-              onClick={(e) => handleListItemClick(e, 4)}
-            />
+              selected={locationReact === navigationRoutes.organisations.path}
+             />
         </List>
         <Divider />
 
@@ -86,10 +70,9 @@ export const LeftNavigation = () => {
               People
             </Typography>
             <NavigationItem  to={navigationRoutes.users.path} icon={<SupervisedUserCircleIcon />} label={'Users'} 
-              selected={selectedIndex === 5}
-              onClick={(e) => handleListItemClick(e, 5)}
+              selected={locationReact === navigationRoutes.users.path}
             />
-        </List>
+        </List> 
 
         <Box
         component="main"
