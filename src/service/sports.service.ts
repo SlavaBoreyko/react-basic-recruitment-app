@@ -38,3 +38,7 @@ const sports: SportsType = {
 export const getSports = async (): Promise<SportsType> => sports;
 export const getSportById = async (id: SportType["id"]) =>
   sports.items.find((s) => s.id === id);
+
+// For button "Add Sport". Add new sport to the head (unshift) of the Table for good UX
+export const addSport = async (newSportData: SportType) => sports.items.unshift(newSportData);
+

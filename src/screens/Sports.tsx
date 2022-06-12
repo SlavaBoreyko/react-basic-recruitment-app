@@ -7,9 +7,10 @@ import { Visibility } from "@mui/icons-material";
 import { getSportById, getSports } from "../service/sports.service";
 import { Grid, Typography } from "@mui/material";
 import { SportForm } from "../components/Form/SportForm";
-
+import { addSport } from "../service/sports.service";
 
 export interface FormState {
+  sport: string;
   name: string;
   location: string;
 }
@@ -17,6 +18,7 @@ export interface FormState {
 export const SportsScreen = () => {
   // For SportForm
   const [newSport, setNewSport] = useState<FormState>({
+    sport: '',
     name: '',
     location: ''
   });
@@ -84,21 +86,35 @@ export const SportsScreen = () => {
     return <NoResults />;
   }
 
-  const alertSave = () => {
+  // Form button Save Handler 
+  const alertSave = async() => {
     if (newSport.name === '' || newSport.location === '') {
       alert(`Please fill the required fields Name and Location`);
     } else {
       setAddSportForm(false);
-      alert(`Submitting sport: ${newSport.name} with location: ${newSport.location}.`);
+      alert(`Submitting sport: ${newSport.sport} with location: ${newSport.location}.`);
+
+      // Save to Table 
+      await addSport({
+        id: sports.items.length + 1, //add to the tail
+        name: newSport.sport,
+        location: newSport.location,
+        shortDescription: newSport.name, // No field in the Form
+        description: "", // No field in the Form
+      })
+
+      // Clean Form
       setNewSport({
+        sport: '',
         name: '',
         location: ''
       });
     }
   } 
-
+  // Form button Cancel Handler 
   const cancelForm = () => {
     setNewSport({
+      sport: '',
       name: '',
       location: ''
     });
