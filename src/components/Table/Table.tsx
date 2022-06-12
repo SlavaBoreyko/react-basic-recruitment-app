@@ -12,7 +12,7 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
-import { CSSProperties, FC, ReactElement, useEffect, useState } from "react";
+import { CSSProperties, Dispatch, FC, ReactElement, SetStateAction, useEffect, useState } from "react";
 import { TableRow } from "./TableRow";
 import { ModelWithId } from "../../types/table.types";
 import { SportType } from "../../types/sports.types";
@@ -29,7 +29,12 @@ type TableProps<Model extends ModelWithId> = {
   items: Model[]; 
   title: string;
   ButtonProps?: Pick<ButtonProps, "children" | "onClick">;
+  // For Action & Sport Detail 
   handleSportId: (e: any, id:any) => void;
+  setindexIcon: Dispatch<SetStateAction<string | number | undefined>>;
+  indexIcon: string | number | undefined;
+  // For form
+  setAddSportForm: Dispatch<SetStateAction<Boolean>>;
 };
 
 export const Table: FC<TableProps<any>> = ({
@@ -37,10 +42,12 @@ export const Table: FC<TableProps<any>> = ({
   items,
   title,
   ButtonProps,
-  handleSportId
+  handleSportId,
+  setindexIcon,
+  indexIcon,
+  setAddSportForm
 }) => {
   const theme = useTheme();
-  const [indexIcon, setindexIcon] = useState<string | number | undefined>(undefined);
 
   return (
     <Box>
@@ -57,7 +64,10 @@ export const Table: FC<TableProps<any>> = ({
       }}>
         <Typography>{title}</Typography>
 
-        <Button variant={"contained"} sx={{ padding: theme.spacing(0.25, 1.5) }} >Add sport</Button>
+        <Button variant={"contained"} sx={{ padding: theme.spacing(0.25, 1.5)  }} 
+                onClick={() => setAddSportForm(true)}>
+          Add sport
+        </Button>
 
         {ButtonProps !== undefined && (
           <Button variant={"contained"} {...ButtonProps} />

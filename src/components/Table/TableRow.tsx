@@ -30,8 +30,7 @@ export const TableRow  = <Model extends ModelWithId>({
 
   useEffect(() => {
     ((indexIcon) && (item['id'] !== indexIcon)) && seticonActive("inherit")
-    console.log(indexIcon)
-  }, [indexIcon])
+  }, [indexIcon, item])
 
   const getItemContent = (
     column: TableColumn<Model>

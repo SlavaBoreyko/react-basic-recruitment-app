@@ -6,12 +6,44 @@ import { SportDetail } from "../components/SportDetail/SportDetail";
 import { Visibility } from "@mui/icons-material";
 import { getSportById, getSports } from "../service/sports.service";
 import { Grid, Typography } from "@mui/material";
+import { SportForm } from "../components/Form/SportForm";
+
+
+export interface FormState {
+  name: string;
+  location: string;
+}
 
 export const SportsScreen = () => {
+  // For SportForm
+  const [newSport, setNewSport] = useState<FormState>({
+    name: '',
+    location: ''
+  });
+
+  const handleChange =
+    (prop: keyof FormState) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setNewSport({ ...newSport, [prop]: event.target.value });
+  };
 
   const [sports, setSports] = useState<SportsType | undefined>(undefined);
   const [sportDetails, setSportDetails] = useState<SportType | undefined>(undefined);
   const [idSport, setSportId] = useState<SportType['id'] | undefined>(undefined);
+  const [indexIcon, setindexIcon] = useState<string | number | undefined>(undefined);
+
+  const [addSportForm, setAddSportForm] = useState<Boolean>(false);
+
+  // Auto switch (close Form / close Card)
+  useEffect(() => {
+    if (addSportForm) {
+      setSportDetails(undefined); 
+      // setindexIcon(undefined); Bug: don't update icon
+    }
+  },[addSportForm])
+
+  useEffect(() => {
+    if (sportDetails) {setAddSportForm(false)}
+  },[sportDetails])
 
   const columns: TableColumn<SportType>[] = [
     { id: "sport", label: "Sport", value: "name" },
@@ -52,6 +84,27 @@ export const SportsScreen = () => {
     return <NoResults />;
   }
 
+  const alertSave = () => {
+    if (newSport.name === '' || newSport.location === '') {
+      alert(`Please fill the required fields Name and Location`);
+    } else {
+      setAddSportForm(false);
+      alert(`Submitting sport: ${newSport.name} with location: ${newSport.location}.`);
+      setNewSport({
+        name: '',
+        location: ''
+      });
+    }
+  } 
+
+  const cancelForm = () => {
+    setNewSport({
+      name: '',
+      location: ''
+    });
+    setAddSportForm(false);
+  }
+
   return (
     <Grid container 
       spacing={4} 
@@ -74,6 +127,9 @@ export const SportsScreen = () => {
             items={sports.items} 
             title={'Sports'}
             handleSportId={handleSportId}
+            setindexIcon={setindexIcon}
+            indexIcon={indexIcon}
+            setAddSportForm={setAddSportForm}
         />
       </Grid>
 
@@ -83,6 +139,20 @@ export const SportsScreen = () => {
           <Grid item md={6}>
             <SportDetail sportDetails={sportDetails} />
           </Grid>
+        )
+      }
+
+      {/* FORM */}
+      { 
+        (addSportForm) && (!sportDetails) && 
+        (<Grid item md={6}>
+          <SportForm 
+            newSport={newSport}
+            handleChange={handleChange}
+            alertSave={alertSave}
+            cancelForm={cancelForm}
+          />
+        </Grid>
         )
       }
     </Grid>
