@@ -24,4 +24,14 @@ export type TableProps<Model extends ModelWithId> = {
   indexIcon: string | number | undefined;
   // For form
   setAddSportForm: Dispatch<SetStateAction<Boolean>>;
+  addSportForm: Boolean;
+};
+
+export type TableRowProps<Model> = {
+  item: Model;
+  columns: TableColumn<Model>[];
+  handleSportId: (id: SportType['id'] | undefined) => void;
+  setindexIcon: Dispatch<SetStateAction<string | number | undefined>>;
+  indexIcon: string | number | undefined;
+  addSportForm: Boolean
 };

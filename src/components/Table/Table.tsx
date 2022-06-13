@@ -12,12 +12,9 @@ import {
   Typography,
   useTheme
 } from "@mui/material";
-import { CSSProperties, Dispatch, FC, ReactElement, SetStateAction} from "react";
+import { FC } from "react";
 import { TableRow } from "./TableRow";
-import { ModelWithId } from "../../types/table.types";
-import { SportType } from "../../types/sports.types";
-import { TableProps, TableColumn } from "../../types/table.types";
-
+import { TableProps } from "../../types/table.types";
 
 
 export const Table: FC<TableProps<any>> = ({
@@ -28,7 +25,8 @@ export const Table: FC<TableProps<any>> = ({
   handleSportId,
   setindexIcon,
   indexIcon,
-  setAddSportForm
+  setAddSportForm,
+  addSportForm
 }) => {
   const theme = useTheme();
 
@@ -51,10 +49,9 @@ export const Table: FC<TableProps<any>> = ({
                 onClick={() => setAddSportForm(true)}>
           Add sport
         </Button>
-
-        {ButtonProps !== undefined && (
+        {/* {ButtonProps !== undefined && (
           <Button variant={"contained"} {...ButtonProps} />
-        )}
+        )} */}
       </Paper>
       
       <TableContainer sx={{ backgroundColor: 'background.paper'}}>
@@ -76,7 +73,7 @@ export const Table: FC<TableProps<any>> = ({
           <TableBody>
             {items.map((item) => (
               <TableRow key={item.id} item={item} columns={columns} handleSportId={handleSportId}
-                setindexIcon={setindexIcon} indexIcon={indexIcon}
+                setindexIcon={setindexIcon} indexIcon={indexIcon} addSportForm={addSportForm}
               />
             ))}
           </TableBody>

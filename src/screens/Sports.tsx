@@ -146,6 +146,7 @@ export const SportsScreen = () => {
             setindexIcon={setindexIcon}
             indexIcon={indexIcon}
             setAddSportForm={setAddSportForm}
+            addSportForm={addSportForm}
         />
       </Grid>
 
